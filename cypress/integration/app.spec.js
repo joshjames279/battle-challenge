@@ -58,7 +58,7 @@ describe('Testing turn page: ', () => {
 
 	it("Attack message:", function(){
         cy.url().should('include', '/turn');
-		cy.contains("Antony attacked Josh and did 10 damage.")
+		cy.contains("Antony attacked Josh and did")
 		cy.get('#next-button').should('have.value', 'Continue');
 	})
 
@@ -78,7 +78,7 @@ describe('Testing battle get request: ', () => {
 	it("Swapped player turn, 'You' set as player whose turn it is", function(){
         cy.url().should('include', '/battle');
 		cy.contains("You: Josh")
-		cy.get('#player1hp').contains('90');
+		cy.get('#player1hp').should('be.visible');
 	})
 
 	it('displays opponent name and hp', () => {
@@ -111,12 +111,12 @@ describe('Testing battle for second attack turn: ', () => {
 	it("Swapped player turn, 'You' set as player whose turn it is", function(){
         cy.url().should('include', '/battle');
 		cy.contains("You: Antony")
-		cy.get('#player1hp').contains('90');
+		cy.get('#player1hp').should('be.visible');
 	})
 
 	it('displays opponent name and hp', () => {
 		cy.contains('Opponent: Josh')
-		cy.get('#player2hp').contains('90');
+		cy.get('#player2hp').should('be.visible');
 	})
 
 	it('displays whose turn it is', () => {
@@ -135,10 +135,11 @@ describe('Game ends when player hp is 0: ', () => {
 		cy.get('#player2-input').type('Josh');
 		cy.get('#submit-names').click();
 
-		for(let i = 0; i < 19; i ++) {
+		for(let i = 0; i < 5; i ++) {
 			cy.get('#attack-button').click();
 			cy.get('#next-button').click();
-		}
+			}
+	
 	})
 
 	it('should display fight over page', () => {

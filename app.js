@@ -29,7 +29,6 @@ app.post('/battle', (req, res) => {
 
 
 app.get('/battle', (req, res) => {
-	console.log(battleTurn.checkGameOver())
 	if(battleTurn.checkGameOver() === true) {
 		res.redirect('/victory');
 	} else {
