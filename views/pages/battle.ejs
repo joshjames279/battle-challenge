@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="player1-Info">
+		<h1>You: <%= player.name %></h1>
+		<h2 id="player1hp">HP: <%= player.hp %></h2>
+	</div>
+	<div id="player2-Info">
+		<h1>Opponent: <%= opponent.name %></h1>
+		<h2 id="player2hp">HP: <%= opponent.hp %></h2>
+	</div>
+	<h2><%= player.name %>'s turn</h2>
+	<form action="/turn" method="POST">
+	<input id="attack-button" type="submit" value="Attack">
+    </form>
+</body>
+</html>

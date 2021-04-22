@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, maximum-scale=1">
+ <title>Document</title>
+</head>
+<body>
+    <p> <%= attackingPlayer.name %> attacked <%= recievingPlayer.name %> and did <%= damage %> damage. </p>
+    <form action="/battle" method="GET">
+        <input id="next-button" type="submit" value="Continue">
+    </form>
+</body>
+</html>
