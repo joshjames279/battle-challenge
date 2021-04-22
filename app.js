@@ -18,7 +18,10 @@ app.get('/', (req, res) => {
 
 app.post('/battle', (req, res) => {
 	const player1 = new Player(req.body.player1Name);
-	const player2 = new Player(req.body.player2Name);
+	let player2 = new Player(req.body.player2Name);
+	if(player2.name === '') {
+	player2.name = 'Gary'
+	}
 	battleTurn.addPlayers(player1, player2)
 	res.render('pages/battle', { 
 		player: battleTurn.playerArray[0],
@@ -26,13 +29,22 @@ app.post('/battle', (req, res) => {
 	})
 })
 
-
-
 app.get('/battle', (req, res) => {
 	if(battleTurn.checkGameOver() === true) {
 		res.redirect('/victory');
 	} else {
 		battleTurn.switchTurn()
+		if(battleTurn.playerArray[0].name === 'Gary') {
+			const attackPlayer = battleTurn.currentTurn();
+			const recievingPlayer = battleTurn.playerArray[1];
+			const damage = Math.floor(Math.random()*101);
+			battleTurn.damage(damage)
+			res.render('pages/turn', {
+				attackingPlayer: attackPlayer,
+				recievingPlayer: recievingPlayer,
+				damage: damage
+		})
+	}
 		res.render('pages/battle', { 
 			player: battleTurn.playerArray[0],
 			opponent: battleTurn.playerArray[1]

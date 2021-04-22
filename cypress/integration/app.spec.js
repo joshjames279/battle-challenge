@@ -128,25 +128,41 @@ describe('Testing battle for second attack turn: ', () => {
 	})
 })
 
-describe('Game ends when player hp is 0: ', () => {
+// describe('Game ends when player hp is 0: ', () => {
+// 	before(() => {
+// 		cy.visit('/');
+// 		cy.get('#player1-input').type('Antony');
+// 		cy.get('#player2-input').type('Josh');
+// 		cy.get('#submit-names').click();
+
+// 		for(let i = 0; i < 5; i ++) {
+// 			cy.get('#attack-button').click();
+// 			cy.get('#next-button').click();
+// 			}
+	
+// 	})
+
+// 	it('should display fight over page', () => {
+// 		cy.url().should('include', '/victory');
+// 		cy.contains('Congratulations Antony, you beat the shit out of Josh. Feel good about yourself?')
+// 		cy.get('#new-game-button').should('have.value', 'Fight Again');
+// 	})
+// })
+
+describe('Checks player2 can be computerised', function() {
 	before(() => {
 		cy.visit('/');
 		cy.get('#player1-input').type('Antony');
-		cy.get('#player2-input').type('Josh');
 		cy.get('#submit-names').click();
-
-		for(let i = 0; i < 5; i ++) {
-			cy.get('#attack-button').click();
-			cy.get('#next-button').click();
-			}
-	
 	})
 
-	it('should display fight over page', () => {
-		cy.url().should('include', '/victory');
-		cy.contains('Congratulations Antony, you beat the shit out of Josh. Feel good about yourself?')
-		cy.get('#new-game-button').should('have.value', 'Fight Again');
+	it('Checks if no name is input for player2 then the default is Gary', function() {
+		cy.contains('Gary')
 	})
 
-
+	it('Checks Gary plays automatically', function() {
+		cy.get('#attack-button').click()
+		cy.get('#next-button').click()
+		cy.contains('Gary attacked Antony')
+	})
 })
