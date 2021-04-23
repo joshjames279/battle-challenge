@@ -10,6 +10,12 @@ class Player{
         }
 		return this.hp -= damage;
     }
+
+    healHealth(medicine) {
+        if(this.hp < 100) {
+        return this.hp += medicine
+        }
+    }
 }
 
 module.exports = Player

@@ -17,7 +17,13 @@
 	</div>
 	<h2><%= player.name %>'s turn</h2>
 	<form action="/turn" method="POST">
-	<input id="attack-button" type="submit" value="Attack">
+		<input id="attack-button" type="submit" value="Attack" name="buttonId">
+		<input id="paralyse-button" type="submit" value="Paralyse" name="buttonId">
+		<input id="poison-button" type="submit" value="Poison" name="buttonId">
+		<input id="sleep-button" type="submit" value="Sleep" name="buttonId">
     </form>
+	<form action="/magic" method="POST">
+		<input id="magic-button" type="submit" value="Magic Attack" name="buttonId">
+	</form>
 </body>
 </html>

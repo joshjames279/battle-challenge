@@ -166,3 +166,69 @@ describe('Checks player2 can be computerised', function() {
 		cy.contains('Gary attacked Antony')
 	})
 })
+
+describe('Checks you can paralyse opponent', function() {
+	before(() => {
+		cy.visit('/');
+		cy.get('#player1-input').type('Antony');
+		cy.get('#submit-names').click();
+	})
+
+	it('Checks there is a paralyse button', function() {
+		cy.get('#paralyse-button').should('be.visible')
+	})
+
+	it('Checks should have damage zero', function() {
+		cy.get('#paralyse-button').click()
+		cy.contains('did 0 damage')
+	})
+})
+
+describe('Checks you can poison an opponent', function() {
+	before(() => {
+		cy.visit('/');
+		cy.get('#player1-input').type('Antony');
+		cy.get('#submit-names').click();
+	})
+	
+	it('Checks there is a poison button', function() {
+		cy.get('#poison-button').should('be.visible')
+	})
+})
+
+describe('Checks you can put an opponent to sleep', function() {
+	before(() => {
+		cy.visit('/');
+		cy.get('#player1-input').type('Antony');
+		cy.get('#submit-names').click();
+	})
+
+	it('Checks there is a sleep button', function() {
+		cy.get('#sleep-button').should('be.visible')
+	})
+
+	it('Checks sleep makes opponent skip ago', function() {
+		cy.contains('You: Antony')
+		cy.get('#sleep-button').click()
+		cy.get('#next-button').click()
+		cy.contains('You: Antony')
+	})
+})
+
+describe('Checks you have a button that attacks and heals', function() {
+	before(() => {
+		cy.visit('/');
+		cy.get('#player1-input').type('Antony');
+		cy.get('#submit-names').click();
+	})
+	
+	it('Checks there is a magic attack button', function () {
+		cy.get('#magic-button').should('be.visible')
+	})
+
+	it('Checks clicking magic button increases HP', function() {
+		cy.get('#magic-button').click()
+		cy.url().should('include', '/magic')
+		cy.contains('used a Magic Attack, their HP increases by')
+	})
+})

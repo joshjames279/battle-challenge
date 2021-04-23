@@ -24,6 +24,23 @@ class BattleTurn {
         this.playerArray[1].takeDamage(hpPoints)
     }
 
+	heal(hpPoints) {
+        this.playerArray[0].healHealth(hpPoints)
+    }
+
+	paralyse() {
+		let number = Math.random()
+		if(number > 0.5) {
+			return this.playerArray.reverse();
+		} else if(number <= 0.49) {
+			return this.playerArray
+		}
+	}
+
+	sleep() {
+		return this.playerArray.reverse();
+	}
+
 	checkGameOver() {
 		this.playerArray.forEach(player => {
 			if(player.hp === 0) {

@@ -55,14 +55,46 @@ app.get('/battle', (req, res) => {
 app.post('/turn', (req,res) => {
 	const attackPlayer = battleTurn.currentTurn();
 	const recievingPlayer = battleTurn.playerArray[1];
-	const damage = Math.floor(Math.random()*101);
-	battleTurn.damage(damage)
+	let attack
+	if(req.body.buttonId === 'Attack') {
+		attack = Math.floor(Math.random()*101);
+		battleTurn.damage(attack)
+	} if(req.body.buttonId === 'Paralyse') {
+		attack = 0
+		battleTurn.paralyse()
+		battleTurn.damage(attack)
+	} if(req.body.buttonId === 'Poison') {
+		attack = Math.floor(Math.random()*30);
+		battleTurn.damage(attack)
+	} else if(req.body.buttonId === 'Sleep') {
+		attack = 0
+		battleTurn.sleep()
+		battleTurn.damage(attack)
+	}
 	res.render('pages/turn', {
 		attackingPlayer: attackPlayer,
 		recievingPlayer: recievingPlayer,
-		damage: damage
+		damage: attack
 	})
-    
+})
+
+app.post('/magic', (req, res) => {
+	const attackPlayer = battleTurn.currentTurn();
+	const recievingPlayer = battleTurn.playerArray[1];
+	let attack
+	let hpPoints
+	req.body.buttonId === 'Magic Attack'
+	attack = Math.floor(Math.random()*50);
+	hpPoints = Math.floor(Math.random()*50)
+	battleTurn.damage(attack)
+	battleTurn.heal(hpPoints)
+
+	res.render('pages/magic', {
+		attackingPlayer: attackPlayer,
+		recievingPlayer: recievingPlayer,
+		damage: attack,
+		heal: hpPoints
+	})
 })
 
 app.get('/victory', (req,res) => {
